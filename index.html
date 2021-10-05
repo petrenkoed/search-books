@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Books API</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body>
+
+<div class="container">
+    <form action="">
+        <div class="input__container">
+
+            <label class="input__name-title" for="search">Введите название книги</label>
+            <input class="input" placeholder="Введите название книги" type="text" id="search">
+
+            <div class="options">
+                <label class="input__number-title" for="number" >Введите кол-во вывода(max = 40)</label>
+                <input class="input input-num" type="number" id="number" value="10">
+
+
+                <label class="select__title" for="select__category">Категория поиска</label>
+                <select class="select" name="Категория поиска" id="select__category">
+                    <option selected value="">По названию</option>
+                    <option value="inauthor">По автору</option>
+                    <option value="inpublisher">По изданию</option>
+                    <option value="subject">По категорий тома</option>
+                </select>
+            </div>
+
+        </div>
+        <button class="search_btn" id="btn" type="button">Поиск</button>
+    </form>
+</div>
+
+<div id="ContainerBook" class="ContainerBook"></div>
+
+<div class="animation">
+    <img src="src/image/shafl.gif" alt="">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="src/js/index.js"></script>
+
+</body>
+</html>
