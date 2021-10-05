@@ -5,26 +5,29 @@ const ContainerBook = document.getElementById('ContainerBook')
 const select = document.getElementById('select__category')
 const animation = document.querySelector('.animation')
 
-btnSearch.addEventListener('click',  event => {
+btnSearch.addEventListener('click',event => {
     event.preventDefault()
 
+    // отчистка результата предыдущего вывода и блокирование кнопки
     ContainerBook.innerHTML = ''
+    btnSearch.disabled = true
 
     if (numberSearch.value < 1 || numberSearch.value > 40 || search.value === '') {
         return alert('Ошибка ввода названия или количества')
     }
     animation.style.display = 'block'
 
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search.value.trim()}+${select.value.trim()}:&maxResults=${numberSearch.value}`)
-        .then( function (response) {
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search.value}+${select.value}:&maxResults=${numberSearch.value}`)
+        .then(function (response) {
             let data = response.data
+            console.log(data)
 
             if (response.data.totalItems === 0) {
                 animation.style.display = 'none'
                return ContainerBook.textContent = 'По вашему запросу не найдено книг!'
             }
 
-            data.items.forEach(item => {
+             data.items.forEach(item => {
                 let bookCase = document.createElement('div')
                 bookCase.classList.add('book__case')
 
@@ -38,10 +41,13 @@ btnSearch.addEventListener('click',  event => {
                 ContainerBook.appendChild(bookCase)
                 animation.style.display = 'none'
              })
+            // рзблокирвоание кнопки
+            btnSearch.disabled = false
         })
         .catch(function (error, response) {
             if (response !== 200) {
                 console.log(`Ошибка: ${error}`)
             }
+            btnSearch.disabled = false
         })
 })
